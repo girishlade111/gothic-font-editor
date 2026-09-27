@@ -1,30 +1,89 @@
 # Gothic Font Editor
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A live gothic-font playground: type any text, pick a gothic typeface, and drag a slider to
+resize it — rendered instantly in a dark, medieval-styled preview panel. Built with
+Next.js, React, and Tailwind CSS.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/gileb64375-5584s-projects/v0-gothic-font-editor)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/DPl4mDx1o4W)
+## What it does
 
-## Overview
+A simple text-styling tool. Enter a name or phrase, choose between the gothic fonts
+**UnifrakturMaguntia** (blackletter) and **Cinzel** (classical Roman caps), and adjust the
+font size with a slider — the preview updates live.
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Features
+
+- **Live text preview** — type anything, see it rendered in gothic type immediately
+- **Two gothic fonts** — UnifrakturMaguntia (blackletter) and Cinzel, loaded via
+  `next/font/google` (self-hosted at build, no runtime Google Fonts request)
+- **Font-size slider** — smooth size control from small to display-size
+- **Dark medieval UI** — slate panel, centered preview stage, shadcn/ui-style controls
+
+## Tech stack
+
+- **Next.js 15** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v3** + `tailwindcss-animate`
+- **Radix UI** primitives (`@radix-ui/react-label`, `react-select`, `react-slider`)
+  via shadcn/ui-style `components/ui`
+- **next/font/google** — Cinzel + UnifrakturMaguntia
+- **lucide-react** icons
+
+## Quick start
+
+```bash
+# Install dependencies (npm or pnpm)
+npm install
+
+# Run the dev server
+npm run dev
+
+# Open http://localhost:3000
+```
+
+## Build
+
+```bash
+npm run build
+npm start
+```
+
+## Project structure
+
+```
+gothic-font-editor/
+├── app/
+│   ├── layout.tsx          # Root layout + metadata
+│   ├── page.tsx            # FontEditor: text input, font select, size slider, preview
+│   └── globals.css         # Tailwind + font variables
+├── components/
+│   ├── theme-provider.tsx   # next-themes wrapper
+│   └── ui/                  # input, label, select, slider
+├── lib/
+│   └── utils.ts             # cn() class helper
+├── public/                  # Static assets
+├── next.config.mjs
+├── components.json          # shadcn/ui config
+└── tailwind.config.ts
+```
+
+## Environment variables
+
+None — the app is fully client-side and needs no secrets or API keys.
 
 ## Deployment
 
-Your project is live at:
+The app has no API routes, server actions, or server-side data fetching, so it can be
+**statically exported** and hosted anywhere static files work (GitHub Pages, Cloudflare
+Pages, Netlify, Vercel).
 
-**[https://vercel.com/gileb64375-5584s-projects/v0-gothic-font-editor](https://vercel.com/gileb64375-5584s-projects/v0-gothic-font-editor)**
+Static export is enabled in `next.config.mjs` via `output: "export"` with
+`basePath: "/gothic-font-editor"` for the GitHub Pages subpath.
 
-## Build your app
+Live demo: https://girishlade111.github.io/gothic-font-editor/
 
-Continue building your app on:
+> Note: `basePath` is only needed for the GitHub Pages subpath. If you deploy to a root
+> domain (e.g. on Vercel or Cloudflare Pages), remove the `basePath` line from
+> `next.config.mjs` and rebuild.
 
-**[https://v0.app/chat/projects/DPl4mDx1o4W](https://v0.app/chat/projects/DPl4mDx1o4W)**
+---
 
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Built by Girish Lade · https://ladestack.in
